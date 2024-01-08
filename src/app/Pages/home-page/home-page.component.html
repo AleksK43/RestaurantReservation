@@ -30,7 +30,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" (click) = "changeComponent('Login')" href="#">Login</a>
                 </li>
             </ul>
         </div>
@@ -49,6 +49,9 @@
         </ng-container>
         <ng-container *ngIf="selectedComponent === 'Contact'">
             <app-contact></app-contact>
+        </ng-container>
+        <ng-container *ngIf="selectedComponent === 'Login'">
+            <app-login></app-login>
         </ng-container>
     </div>
     
