@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/Services/component-share.service';
 
 @Component({
   selector: 'app-home-page',
@@ -8,9 +9,18 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent {
  public selectedComponent: string = "app-main-page-grid";
+ constructor( private SharedService: SharedService) {}
+
+ ngOnInit() {
+  console.log('ngOnInit called');
+  this.SharedService.selectedComponent$.subscribe(component => {
+    this.selectedComponent = component;
+  });
+}
+ 
 
  changeComponent(componentName: string) {
-  this.selectedComponent = componentName;
+  this.SharedService.changeSelectedComponent(componentName);
 }
 
 }
