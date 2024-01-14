@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+=======
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
+>>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
 
 @Injectable({
   providedIn: 'root'
 })
+<<<<<<< HEAD
 export class RestaurantService {
   private apiUrl = 'http://localhost:8080/phpapi/RestaruantsControllers';
   private selectedRestaurantId: number | null = null;
@@ -16,6 +23,16 @@ export class RestaurantService {
     return this.http.get<any[]>(`${this.apiUrl}/AllRestaurantController.php`).pipe(
       catchError(this.handleError)
     );
+=======
+export class RestauratnService {
+  private apiUrl = 'http://localhost:8080/phpapi/RestaruantsControllers'; 
+  constructor(private http: HttpClient) { }
+  private selectedRestaurantId: number | null = null; 
+
+
+  getAllItems(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/AllRestaurantController.php`);
+>>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
   }
 
   getRestaurantById(restaurantId: number): Observable<any> {
@@ -26,6 +43,7 @@ export class RestaurantService {
     return this.http.get<any>(`${this.apiUrl}/SingleRestaurantController.php?id=${restaurantId}`);
   }
 
+<<<<<<< HEAD
   deleteRestaurant(restaurantId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/DeleteRestaurantController.php?id=${restaurantId}`).pipe(
       catchError(this.handleError)
@@ -45,6 +63,8 @@ export class RestaurantService {
     );
   }
   
+=======
+>>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
 
   setSelectedRestaurantId(restaurantId: number): void {
     this.selectedRestaurantId = restaurantId;
@@ -53,9 +73,14 @@ export class RestaurantService {
   getSelectedRestaurantId(): number | null {
     return this.selectedRestaurantId;
   }
+<<<<<<< HEAD
 
   private handleError(error: any) {
     console.error('Wystąpił błąd:', error);
     return throwError('Coś poszło nie tak; spróbuj ponownie później.');
   }
 }
+=======
+}
+ 
+>>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
