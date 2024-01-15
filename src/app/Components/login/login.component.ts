@@ -3,13 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/Services/user.service';
 import { UserModel } from 'src/app/Models/user.model';
 import { SharedService } from 'src/app/Services/component-share.service';
-<<<<<<< HEAD
 import { Router } from '@angular/router';
-import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-=======
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -31,13 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private sharedService: SharedService,
-<<<<<<< HEAD
     private formBuilder: FormBuilder,
-    private router: Router,
-    private httpClient: HttpClient
-=======
-    private formBuilder: FormBuilder
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -52,62 +44,46 @@ export class LoginComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
   handleError(error: HttpErrorResponse) {
+    console.error('Błąd podczas żądania do serwera:', error);
+
     if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
+      console.error('Błąd zdarzenia:', error.error.message);
     } else {
       console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${JSON.stringify(error.error)}`);
+        `Serwer zwrócił kod ${error.status}, ` +
+        `body: ${JSON.stringify(error.error)}`
+      );
     }
 
-    return throwError('Something bad happened; please try again later.');
+    return throwError('Coś poszło nie tak; spróbuj ponownie później.');
   }
 
-=======
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
   NavigateToRegistration() {
-    // Wysyłanie informacji o zmianie komponentu do SharedService
-    this.sharedService.changeSelectedComponent('Registration');
+    this.router.navigate(['/registration']); 
   }
 
   loginUser(): void {
     if (this.loginForm.valid) {
-<<<<<<< HEAD
       this.user = { ...this.loginForm.value };
-=======
-      // Jeśli formularz jest poprawny, wykonaj logikę logowania
-      this.user = { ...this.loginForm.value }; // Skopiuj wartości z formularza do obiektu user
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
 
-      this.userService.loginUser(this.user).subscribe(
+      this.userService.loginUser(this.user.email, this.user.password).subscribe(
         response => {
-          console.log('Użytkownik został pomyślnie zalogowany', response);
+          console.log('Odpowiedź od serwera:', response);
 
-<<<<<<< HEAD
-          // Przekierowanie użytkownika na podstawie wartości isAdmin
-          if (response.user && response.user.isAdmin === 1) {
+          if (this.userService.checkIsAdmin(this.user.isAdmin)) {
             console.log('Weszło Login Component');
             this.router.navigate(['/Admin']);
           } else {
             this.router.navigate(['/MainGrid']);
-=======
-          // Sprawdź tutaj czy użytkownik jest administratorem
-          if (response.user && response.user.IsAdmin) {
-            // Użytkownik jest administratorem, wykonaj odpowiednie akcje
-            console.log('Użytkownik jest administratorem');
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
           }
 
-          // Zresetuj formularz i ukryj komunikat o błędzie
           this.loginForm.reset();
           this.loginError = false;
         },
         error => {
           console.error('Błąd podczas logowania', error);
 
-          // Wyświetl komunikat o błędzie
           this.loginError = true;
         }
       );

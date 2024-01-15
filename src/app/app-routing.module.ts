@@ -6,6 +6,8 @@ import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { LoginComponent } from './Components/login/login.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AdminViewComponent } from './Components/admin-view/admin-view.component';
+import { ReservationComponent } from './Components/reservation/reservation.component';
+import { RegistrationComponent } from './Components/registration/registration.component';
 
 const routes: Routes = [
   {path: 'HomePage', component:HomePageComponent},
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'AboutUs', component: AboutUsComponent},
   {path: 'Admin', component: AdminViewComponent, canActivate: [AdminGuard] },
   {path: 'login', component: LoginComponent},
+  {path: 'registration', component:RegistrationComponent},
+  {path :'reservation', component:ReservationComponent},
   { path: '', component: HomePageComponent, pathMatch: 'full' }
 ];
 

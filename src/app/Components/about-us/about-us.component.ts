@@ -14,6 +14,6 @@ constructor(
 
 RedirectToHomePageGrid()
 {
-  this.router.navigate(['HomePage'])
+  this.router.navigate(['/MainGrid'])
 }
 }

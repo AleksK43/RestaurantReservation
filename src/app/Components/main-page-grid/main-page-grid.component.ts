@@ -1,32 +1,29 @@
 // main-page-grid.component.ts
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { RestaurantService } from 'src/app/Services/restaurant-service.service';
-=======
-import { RestauratnService } from 'src/app/Services/restaurant-service.service';
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
 import { SharedService } from 'src/app/Services/component-share.service';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/Services/user.service';
+
 
 @Component({
   selector: 'app-main-page-grid',
   templateUrl: './main-page-grid.component.html',
   styleUrls: ['./main-page-grid.component.scss']
+  
 })
 export class MainPageGridComponent implements OnInit {
   restaurants: any[] = [];
-  selectedComponent: string = ''; // Dodaj deklarację selectedComponent
+  selectedComponent: string = ''; 
+  selectedRestaurant: any = null
 
-<<<<<<< HEAD
-  constructor(private RestaurantService: RestaurantService, private SharedService: SharedService) {}
+  constructor(private RestaurantService: RestaurantService,
+    private SharedService: SharedService,
+    private router:Router,
+    private userService: UserService) {}
 
   ngOnInit() {
     this.RestaurantService.getAllItems().subscribe(data => {
-=======
-  constructor(private RestauratnService: RestauratnService, private SharedService: SharedService) {}
-
-  ngOnInit() {
-    this.RestauratnService.getAllItems().subscribe(data => {
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
       this.restaurants = data;
       this.SharedService.selectedComponent$.subscribe(component => {
         this.selectedComponent = component;
@@ -34,14 +31,26 @@ export class MainPageGridComponent implements OnInit {
     });
   }
 
-  navigateToRestaurantDetail(restaurantId: number) {
+  navigateToRestaurantDetail(restaurantId: any) {
     // Wysyłanie informacji o zmianie komponentu do SharedService
     this.SharedService.changeSelectedComponent('RestaurantDetail');
-<<<<<<< HEAD
     this.RestaurantService.setSelectedRestaurantId(restaurantId);
-=======
-    this.RestauratnService.setSelectedRestaurantId(restaurantId);
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
-
   }
+
+  
+  navigateToReservation(restaurant: any){
+    if(this.userService.isUserLoggedIn())
+    {
+    const userId = localStorage.getItem('userID'); 
+    this.SharedService.setSelectedReservationData({ userId, restaurantId: restaurant.ID });
+    console.log(userId, restaurant.ID)
+    this.router.navigate(['/reservation'])
+    }else 
+    {
+      alert ('musisz być zalogowany aby zarezerwować miejsce')
+      this.router.navigate(['/login'])
+    }
+  }
+
 }
+  

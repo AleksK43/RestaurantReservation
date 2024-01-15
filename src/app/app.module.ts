@@ -13,11 +13,9 @@ import { SharedService } from './Services/component-share.service';
 import { RegistrationComponent } from './Components/registration/registration.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
 import { AdminViewComponent } from './Components/admin-view/admin-view.component';
 import { UserService } from './Services/user.service';
-=======
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
+import { ReservationComponent } from './Components/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +27,8 @@ import { UserService } from './Services/user.service';
     LoginComponent,
     RestaurantDetailComponent,
     RegistrationComponent,
-<<<<<<< HEAD
     AdminViewComponent,
-=======
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
+    ReservationComponent,
   ],
   imports: [
     HttpClientModule,
@@ -41,14 +37,10 @@ import { UserService } from './Services/user.service';
     FormsModule, 
     ReactiveFormsModule,
   ],
-<<<<<<< HEAD
   providers: [
     SharedService,
     UserService, 
   ],
-=======
-  providers: [SharedService],
->>>>>>> d3b5396b17c0f009acca727eefcddc584e5705db
   bootstrap: [AppComponent],
 })
 export class AppModule {}
