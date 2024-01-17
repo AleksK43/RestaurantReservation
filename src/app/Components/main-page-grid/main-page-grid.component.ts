@@ -32,23 +32,19 @@ export class MainPageGridComponent implements OnInit {
   }
 
   navigateToRestaurantDetail(restaurantId: any) {
-    // Wysyłanie informacji o zmianie komponentu do SharedService
     this.SharedService.changeSelectedComponent('RestaurantDetail');
     this.RestaurantService.setSelectedRestaurantId(restaurantId);
   }
 
-  
-  navigateToReservation(restaurant: any){
-    if(this.userService.isUserLoggedIn())
-    {
-    const userId = localStorage.getItem('userID'); 
-    this.SharedService.setSelectedReservationData({ userId, restaurantId: restaurant.ID });
-    console.log(userId, restaurant.ID)
-    this.router.navigate(['/reservation'])
-    }else 
-    {
-      alert ('musisz być zalogowany aby zarezerwować miejsce')
-      this.router.navigate(['/login'])
+  navigateToReservation(restaurant: any) {
+    if (this.userService.isUserLoggedIn()) {
+      const userId = localStorage.getItem('userId');
+      const restaurantId = restaurant.ID;
+      console.log('userId:', userId, 'restaurantId:', restaurantId); 
+      this.router.navigate(['/reservation'], { queryParams: { 'userId': userId, 'restaurantId': restaurantId } });
+    } else {
+      alert('Musisz być zalogowany, aby zarezerwować miejsce');
+      this.router.navigate(['/login']);
     }
   }
 
